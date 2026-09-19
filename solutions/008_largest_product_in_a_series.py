@@ -13,9 +13,8 @@ num_list = np.array(list(str_number), dtype=int)
 #Essentially iterates through the whole list in a brute force manner
 #Calculates the product of every 13 integers
 #Compares with the largest product that is stored
-for i in range(len(num_list)):
-    sub_list = np.array(num_list[i:i+13])
-    print(sub_list)
+for i in range(len(num_list-12)): #-12 prevents it from finding products where the range is less than 13 digits
+    sub_list = num_list[i:i+13]
     product = np.prod(sub_list)
     if product > max_product:
         max_product = product
