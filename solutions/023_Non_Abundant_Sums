@@ -1,0 +1,57 @@
+#sum of divisors = perfect
+#sum of divisors < deficient
+#sum of divisors > abundant
+
+
+#set a series of functions that may become useful
+def find_divisors(num):
+    factors = []
+    for i in range(1, (num//2)+1): #apparently this is redunant or slows it down drastically
+        if num % i == 0:
+            factors.append(i)
+    return factors
+
+def is_abundant(num):
+    factors = find_divisors(num)
+    s = sum(factors)
+    if s > num:
+        return True
+
+def is_perfect(num):
+    factors = find_divisors(num)
+    s = sum(factors)
+    if s == num:
+        return True
+
+def is_deficient(num):
+    factors = find_divisors(num)
+    s = sum(factors)
+    if s < num:
+        return True
+
+abundant_numbers = []
+for i in range(28124):
+    if is_abundant(i):
+        abundant_numbers.append(i)
+
+def check_sum_of_ab_num(num):
+    global abundant_numbers
+    abundant_set = abundant_numbers
+    temp = 0
+    for ab_num in abundant_numbers:
+        temp = ab_num
+        looking = num - temp
+        if looking in abundant_set:
+            return True
+
+    return False
+
+print(check_sum_of_ab_num(28))
+       #upper limit of 28123
+
+total = 0
+for i in range(28124):
+    if not check_sum_of_ab_num(i):
+        total += i
+
+print(total) 
